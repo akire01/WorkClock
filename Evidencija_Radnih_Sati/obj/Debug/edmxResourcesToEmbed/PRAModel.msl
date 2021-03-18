@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PRAModelStoreContainer" CdmEntityContainer="BazaPRA">
+    <EntitySetMapping Name="Djelatniks">
+      <EntityTypeMapping TypeName="PRAModel.Djelatnik">
+        <MappingFragment StoreEntitySet="Djelatnik">
+          <ScalarProperty Name="IDDjelatnik" ColumnName="IDDjelatnik" />
+          <ScalarProperty Name="TipID" ColumnName="TipID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DatumZaposlenja" ColumnName="DatumZaposlenja" />
+          <ScalarProperty Name="TimID" ColumnName="TimID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klijents">
+      <EntityTypeMapping TypeName="PRAModel.Klijent">
+        <MappingFragment StoreEntitySet="Klijent">
+          <ScalarProperty Name="IDKlijent" ColumnName="IDKlijent" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoginDjelatniks">
+      <EntityTypeMapping TypeName="PRAModel.LoginDjelatnik">
+        <MappingFragment StoreEntitySet="LoginDjelatnik">
+          <ScalarProperty Name="DjelatnikID" ColumnName="DjelatnikID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekts">
+      <EntityTypeMapping TypeName="PRAModel.Projekt">
+        <MappingFragment StoreEntitySet="Projekt">
+          <ScalarProperty Name="IDProjekt" ColumnName="IDProjekt" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="DatumOtvaranja" ColumnName="DatumOtvaranja" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekt_Djelatnik">
+      <EntityTypeMapping TypeName="PRAModel.Projekt_Djelatnik">
+        <MappingFragment StoreEntitySet="Projekt_Djelatnik">
+          <ScalarProperty Name="IDProjekt_Djelatnik" ColumnName="IDProjekt_Djelatnik" />
+          <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+          <ScalarProperty Name="DjelatnikID" ColumnName="DjelatnikID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekt_Klijent">
+      <EntityTypeMapping TypeName="PRAModel.Projekt_Klijent">
+        <MappingFragment StoreEntitySet="Projekt_Klijent">
+          <ScalarProperty Name="IDProjekt_Djelatnik" ColumnName="IDProjekt_Djelatnik" />
+          <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+          <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekt_Tim">
+      <EntityTypeMapping TypeName="PRAModel.Projekt_Tim">
+        <MappingFragment StoreEntitySet="Projekt_Tim">
+          <ScalarProperty Name="IDProjektTim" ColumnName="IDProjektTim" />
+          <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+          <ScalarProperty Name="TimID" ColumnName="TimID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SatiProjekts">
+      <EntityTypeMapping TypeName="PRAModel.SatiProjekt">
+        <MappingFragment StoreEntitySet="SatiProjekt">
+          <ScalarProperty Name="Komentar" ColumnName="Komentar" />
+          <ScalarProperty Name="IDSatiProjekt" ColumnName="IDSatiProjekt" />
+          <ScalarProperty Name="DjelatnikID" ColumnName="DjelatnikID" />
+          <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="SatiPrekovremeni" ColumnName="SatiPrekovremeni" />
+          <ScalarProperty Name="SatiRadni" ColumnName="SatiRadni" />
+          <ScalarProperty Name="Predano" ColumnName="Predano" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tims">
+      <EntityTypeMapping TypeName="PRAModel.Tim">
+        <MappingFragment StoreEntitySet="Tim">
+          <ScalarProperty Name="IDTim" ColumnName="IDTim" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipDjelatnikas">
+      <EntityTypeMapping TypeName="PRAModel.TipDjelatnika">
+        <MappingFragment StoreEntitySet="TipDjelatnika">
+          <ScalarProperty Name="IDTip" ColumnName="IDTip" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ActivityChange" FunctionName="PRAModel.Store.ActivityChange" />
+    <FunctionImportMapping FunctionImportName="GetDjelatnici" FunctionName="PRAModel.Store.GetDjelatnici">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetDjelatnici_Result">
+          <ScalarProperty Name="IDDjelatnik" ColumnName="IDDjelatnik" />
+          <ScalarProperty Name="TipID" ColumnName="TipID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DatumZaposlenja" ColumnName="DatumZaposlenja" />
+          <ScalarProperty Name="TimID" ColumnName="TimID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetDjelatnik" FunctionName="PRAModel.Store.GetDjelatnik">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetDjelatnik_Result">
+          <ScalarProperty Name="IDDjelatnik" ColumnName="IDDjelatnik" />
+          <ScalarProperty Name="TipID" ColumnName="TipID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DatumZaposlenja" ColumnName="DatumZaposlenja" />
+          <ScalarProperty Name="TimID" ColumnName="TimID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetDjelatnikeNaProjektu" FunctionName="PRAModel.Store.GetDjelatnikeNaProjektu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetDjelatnikeNaProjektu_Result">
+          <ScalarProperty Name="IDDjelatnik" ColumnName="IDDjelatnik" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="TipID" ColumnName="TipID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetIzvjestajPoTimu" FunctionName="PRAModel.Store.GetIzvjestajPoTimu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetIzvjestajPoTimu_Result">
+          <ScalarProperty Name="IDSatiProjekt" ColumnName="IDSatiProjekt" />
+          <ScalarProperty Name="DjelatnikID" ColumnName="DjelatnikID" />
+          <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="SatiPrekovremeni" ColumnName="SatiPrekovremeni" />
+          <ScalarProperty Name="SatiRadni" ColumnName="SatiRadni" />
+          <ScalarProperty Name="Predano" ColumnName="Predano" />
+          <ScalarProperty Name="IDDjelatnik" ColumnName="IDDjelatnik" />
+          <ScalarProperty Name="TipID" ColumnName="TipID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DatumZaposlenja" ColumnName="DatumZaposlenja" />
+          <ScalarProperty Name="TimID" ColumnName="TimID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+          <ScalarProperty Name="IDTim" ColumnName="IDTim" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="Aktivnost1" ColumnName="Aktivnost1" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetIzvjestajZaKlijenta" FunctionName="PRAModel.Store.GetIzvjestajZaKlijenta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetIzvjestajZaKlijenta_Result">
+          <ScalarProperty Name="IDSatiProjekt" ColumnName="IDSatiProjekt" />
+          <ScalarProperty Name="DjelatnikID" ColumnName="DjelatnikID" />
+          <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="SatiPrekovremeni" ColumnName="SatiPrekovremeni" />
+          <ScalarProperty Name="SatiRadni" ColumnName="SatiRadni" />
+          <ScalarProperty Name="Predano" ColumnName="Predano" />
+          <ScalarProperty Name="IDProjekt" ColumnName="IDProjekt" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="DatumOtvaranja" ColumnName="DatumOtvaranja" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+          <ScalarProperty Name="IDKlijent" ColumnName="IDKlijent" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetKlijent" FunctionName="PRAModel.Store.GetKlijent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetKlijent_Result">
+          <ScalarProperty Name="IDKlijent" ColumnName="IDKlijent" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetKlijenti" FunctionName="PRAModel.Store.GetKlijenti">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetKlijenti_Result">
+          <ScalarProperty Name="IDKlijent" ColumnName="IDKlijent" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetProjectId" FunctionName="PRAModel.Store.GetProjectId" />
+    <FunctionImportMapping FunctionImportName="GetProjekt" FunctionName="PRAModel.Store.GetProjekt">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetProjekt_Result">
+          <ScalarProperty Name="IDProjekt" ColumnName="IDProjekt" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="DatumOtvaranja" ColumnName="DatumOtvaranja" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="KlijentID" ColumnName="KlijentID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetProjekteDjelatnika" FunctionName="PRAModel.Store.GetProjekteDjelatnika" />
+    <FunctionImportMapping FunctionImportName="GetTeams" FunctionName="PRAModel.Store.GetTeams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetTeams_Result">
+          <ScalarProperty Name="IDTim" ColumnName="IDTim" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTim" FunctionName="PRAModel.Store.GetTim">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetTim_Result">
+          <ScalarProperty Name="IDTim" ColumnName="IDTim" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTimoveNaProjektu" FunctionName="PRAModel.Store.GetTimoveNaProjektu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetTimoveNaProjektu_Result">
+          <ScalarProperty Name="IDTim" ColumnName="IDTim" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+          <ScalarProperty Name="IDProjektTim" ColumnName="IDProjektTim" />
+          <ScalarProperty Name="ProjektID" ColumnName="ProjektID" />
+          <ScalarProperty Name="TimID" ColumnName="TimID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTimovi" FunctionName="PRAModel.Store.GetTimovi">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetTimovi_Result">
+          <ScalarProperty Name="IDTim" ColumnName="IDTim" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="VoditeljID" ColumnName="VoditeljID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTypes" FunctionName="PRAModel.Store.GetTypes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetTypes_Result">
+          <ScalarProperty Name="IDTip" ColumnName="IDTip" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetVoditelji" FunctionName="PRAModel.Store.GetVoditelji">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PRAModel.GetVoditelji_Result">
+          <ScalarProperty Name="IDDjelatnik" ColumnName="IDDjelatnik" />
+          <ScalarProperty Name="TipID" ColumnName="TipID" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DatumZaposlenja" ColumnName="DatumZaposlenja" />
+          <ScalarProperty Name="TimID" ColumnName="TimID" />
+          <ScalarProperty Name="Aktivnost" ColumnName="Aktivnost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="InsertDjelatnikNaProjekt" FunctionName="PRAModel.Store.InsertDjelatnikNaProjekt" />
+    <FunctionImportMapping FunctionImportName="InsertEmployee" FunctionName="PRAModel.Store.InsertEmployee" />
+    <FunctionImportMapping FunctionImportName="InsertKlijent" FunctionName="PRAModel.Store.InsertKlijent" />
+    <FunctionImportMapping FunctionImportName="InsertProject" FunctionName="PRAModel.Store.InsertProject" />
+    <FunctionImportMapping FunctionImportName="InsertTeam" FunctionName="PRAModel.Store.InsertTeam" />
+    <FunctionImportMapping FunctionImportName="InsertTimNaProjekt" FunctionName="PRAModel.Store.InsertTimNaProjekt" />
+    <FunctionImportMapping FunctionImportName="IzbaciDjelatnikaSProjekta" FunctionName="PRAModel.Store.IzbaciDjelatnikaSProjekta" />
+    <FunctionImportMapping FunctionImportName="IzbaciTimSProjekta" FunctionName="PRAModel.Store.IzbaciTimSProjekta" />
+    <FunctionImportMapping FunctionImportName="LoginUser" FunctionName="PRAModel.Store.LoginUser" />
+    <FunctionImportMapping FunctionImportName="UpdateDjelatnik" FunctionName="PRAModel.Store.UpdateDjelatnik" />
+    <FunctionImportMapping FunctionImportName="UpdateKlijent" FunctionName="PRAModel.Store.UpdateKlijent" />
+    <FunctionImportMapping FunctionImportName="UpdateProject" FunctionName="PRAModel.Store.UpdateProject" />
+    <FunctionImportMapping FunctionImportName="UpdateTim" FunctionName="PRAModel.Store.UpdateTim" />
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PRAModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

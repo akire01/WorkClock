@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb34bd54e544472c8415e390c661bb56" Name="Diagram1">
+        <EntityTypeShape EntityType="PRAModel.Djelatnik" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.Klijent" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.LoginDjelatnik" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.Projekt" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.Projekt_Djelatnik" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.Projekt_Klijent" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.Projekt_Tim" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.SatiProjekt" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.Tim" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PRAModel.TipDjelatnika" Width="1.5" PointX="1.5" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="PRAModel.FK__Djelatnik__TimID__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Djelatnik__TipID__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt__Voditel__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt_D__Djela__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__SatiProje__Djela__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Tim__VoditeljID__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt__Klijent__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt_K__Klije__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt_D__Proje__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt_K__Proje__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt_T__Proje__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__SatiProje__Proje__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__Projekt_T__TimID__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="PRAModel.FK__LoginDjel__Djela__151B244E" />
+        <EntityTypeShape EntityType="PRAModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

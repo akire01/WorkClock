@@ -1,0 +1,32 @@
+﻿body {
+}
+
+.navbar {
+    justify-content: left;
+    /*background-color: #3F8EFC !important;*/
+    background-color: #333333 !important;
+    width: 100%;
+}
+
+a {
+   padding: 20px;
+}
+
+a:hover {
+   font-weight: bold;
+}
+
+.btn-primary {
+    margin-top: 15px;
+    margin-left: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-color: red;
+    background-color: red;
+}
+
+
+.btn-danger {
+    margin: 10px;
+}
+

@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PRAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Djelatnik">
+    <Key>
+      <PropertyRef Name="IDDjelatnik" />
+    </Key>
+    <Property Name="IDDjelatnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipID" Type="int" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DatumZaposlenja" Type="date" Nullable="false" />
+    <Property Name="TimID" Type="int" Nullable="false" />
+    <Property Name="Aktivnost" Type="bit" />
+  </EntityType>
+  <EntityType Name="Klijent">
+    <Key>
+      <PropertyRef Name="IDKlijent" />
+    </Key>
+    <Property Name="IDKlijent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoginDjelatnik">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="DjelatnikID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projekt">
+    <Key>
+      <PropertyRef Name="IDProjekt" />
+    </Key>
+    <Property Name="IDProjekt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DatumOtvaranja" Type="date" Nullable="false" />
+    <Property Name="VoditeljID" Type="int" />
+    <Property Name="KlijentID" Type="int" />
+    <Property Name="Aktivnost" Type="bit" />
+  </EntityType>
+  <EntityType Name="Projekt_Djelatnik">
+    <Key>
+      <PropertyRef Name="IDProjekt_Djelatnik" />
+    </Key>
+    <Property Name="IDProjekt_Djelatnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjektID" Type="int" Nullable="false" />
+    <Property Name="DjelatnikID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projekt_Klijent">
+    <Key>
+      <PropertyRef Name="IDProjekt_Djelatnik" />
+    </Key>
+    <Property Name="IDProjekt_Djelatnik" Type="int" Nullable="false" />
+    <Property Name="ProjektID" Type="int" />
+    <Property Name="KlijentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Projekt_Tim">
+    <Key>
+      <PropertyRef Name="IDProjektTim" />
+    </Key>
+    <Property Name="IDProjektTim" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjektID" Type="int" Nullable="false" />
+    <Property Name="TimID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SatiProjekt">
+    <Key>
+      <PropertyRef Name="IDSatiProjekt" />
+    </Key>
+    <Property Name="IDSatiProjekt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DjelatnikID" Type="int" Nullable="false" />
+    <Property Name="ProjektID" Type="int" Nullable="false" />
+    <Property Name="Datum" Type="date" />
+    <Property Name="SatiPrekovremeni" Type="int" />
+    <Property Name="SatiRadni" Type="int" />
+    <Property Name="Predano" Type="bit" />
+    <Property Name="Komentar" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tim">
+    <Key>
+      <PropertyRef Name="IDTim" />
+    </Key>
+    <Property Name="IDTim" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VoditeljID" Type="int" />
+    <Property Name="Aktivnost" Type="bit" />
+    <Property Name="DatumKreiranja" Type="date" />
+  </EntityType>
+  <EntityType Name="TipDjelatnika">
+    <Key>
+      <PropertyRef Name="IDTip" />
+    </Key>
+    <Property Name="IDTip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Djelatnik__TimID__300424B4">
+    <End Role="Tim" Type="Self.Tim" Multiplicity="1" />
+    <End Role="Djelatnik" Type="Self.Djelatnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tim">
+        <PropertyRef Name="IDTim" />
+      </Principal>
+      <Dependent Role="Djelatnik">
+        <PropertyRef Name="TimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Djelatnik__TipID__656C112C">
+    <End Role="TipDjelatnika" Type="Self.TipDjelatnika" Multiplicity="1" />
+    <End Role="Djelatnik" Type="Self.Djelatnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipDjelatnika">
+        <PropertyRef Name="IDTip" />
+      </Principal>
+      <Dependent Role="Djelatnik">
+        <PropertyRef Name="TipID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LoginDjel__Djela__151B244E">
+    <End Role="Djelatnik" Type="Self.Djelatnik" Multiplicity="1" />
+    <End Role="LoginDjelatnik" Type="Self.LoginDjelatnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Djelatnik">
+        <PropertyRef Name="IDDjelatnik" />
+      </Principal>
+      <Dependent Role="LoginDjelatnik">
+        <PropertyRef Name="DjelatnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt__Klijent__5AEE82B9">
+    <End Role="Klijent" Type="Self.Klijent" Multiplicity="0..1" />
+    <End Role="Projekt" Type="Self.Projekt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klijent">
+        <PropertyRef Name="IDKlijent" />
+      </Principal>
+      <Dependent Role="Projekt">
+        <PropertyRef Name="KlijentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt__Voditel__4AB81AF0">
+    <End Role="Djelatnik" Type="Self.Djelatnik" Multiplicity="0..1" />
+    <End Role="Projekt" Type="Self.Projekt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Djelatnik">
+        <PropertyRef Name="IDDjelatnik" />
+      </Principal>
+      <Dependent Role="Projekt">
+        <PropertyRef Name="VoditeljID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt_D__Djela__4F7CD00D">
+    <End Role="Djelatnik" Type="Self.Djelatnik" Multiplicity="1" />
+    <End Role="Projekt_Djelatnik" Type="Self.Projekt_Djelatnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Djelatnik">
+        <PropertyRef Name="IDDjelatnik" />
+      </Principal>
+      <Dependent Role="Projekt_Djelatnik">
+        <PropertyRef Name="DjelatnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt_D__Proje__4E88ABD4">
+    <End Role="Projekt" Type="Self.Projekt" Multiplicity="1" />
+    <End Role="Projekt_Djelatnik" Type="Self.Projekt_Djelatnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projekt">
+        <PropertyRef Name="IDProjekt" />
+      </Principal>
+      <Dependent Role="Projekt_Djelatnik">
+        <PropertyRef Name="ProjektID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt_K__Klije__49C3F6B7">
+    <End Role="Klijent" Type="Self.Klijent" Multiplicity="0..1" />
+    <End Role="Projekt_Klijent" Type="Self.Projekt_Klijent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klijent">
+        <PropertyRef Name="IDKlijent" />
+      </Principal>
+      <Dependent Role="Projekt_Klijent">
+        <PropertyRef Name="KlijentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt_K__Proje__48CFD27E">
+    <End Role="Projekt" Type="Self.Projekt" Multiplicity="0..1" />
+    <End Role="Projekt_Klijent" Type="Self.Projekt_Klijent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projekt">
+        <PropertyRef Name="IDProjekt" />
+      </Principal>
+      <Dependent Role="Projekt_Klijent">
+        <PropertyRef Name="ProjektID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt_T__Proje__5DCAEF64">
+    <End Role="Projekt" Type="Self.Projekt" Multiplicity="1" />
+    <End Role="Projekt_Tim" Type="Self.Projekt_Tim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projekt">
+        <PropertyRef Name="IDProjekt" />
+      </Principal>
+      <Dependent Role="Projekt_Tim">
+        <PropertyRef Name="ProjektID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekt_T__TimID__5EBF139D">
+    <End Role="Tim" Type="Self.Tim" Multiplicity="1" />
+    <End Role="Projekt_Tim" Type="Self.Projekt_Tim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tim">
+        <PropertyRef Name="IDTim" />
+      </Principal>
+      <Dependent Role="Projekt_Tim">
+        <PropertyRef Name="TimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SatiProje__Djela__7D439ABD">
+    <End Role="Djelatnik" Type="Self.Djelatnik" Multiplicity="1" />
+    <End Role="SatiProjekt" Type="Self.SatiProjekt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Djelatnik">
+        <PropertyRef Name="IDDjelatnik" />
+      </Principal>
+      <Dependent Role="SatiProjekt">
+        <PropertyRef Name="DjelatnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SatiProje__Proje__7E37BEF6">
+    <End Role="Projekt" Type="Self.Projekt" Multiplicity="1" />
+    <End Role="SatiProjekt" Type="Self.SatiProjekt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projekt">
+        <PropertyRef Name="IDProjekt" />
+      </Principal>
+      <Dependent Role="SatiProjekt">
+        <PropertyRef Name="ProjektID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tim__VoditeljID__30F848ED">
+    <End Role="Djelatnik" Type="Self.Djelatnik" Multiplicity="0..1" />
+    <End Role="Tim" Type="Self.Tim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Djelatnik">
+        <PropertyRef Name="IDDjelatnik" />
+      </Principal>
+      <Dependent Role="Tim">
+        <PropertyRef Name="VoditeljID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ActivityChange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="objekt" Type="nvarchar" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="aktivnost" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetDjelatnici" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetDjelatnik" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetDjelatnikeNaProjektu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDProjekt" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetIzvjestajPoTimu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="timID" Type="int" Mode="In" />
+    <Parameter Name="DatumPocetak" Type="date" Mode="In" />
+    <Parameter Name="DatumKraj" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetIzvjestajZaKlijenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KlijentID" Type="int" Mode="In" />
+    <Parameter Name="DatumPocetak" Type="date" Mode="In" />
+    <Parameter Name="DatumKraj" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetKlijenti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetProjectId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="naziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetProjekt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetProjekteDjelatnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDDjelatnika" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTeams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTimoveNaProjektu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDProjekt" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTimovi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetVoditelji" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="InsertDjelatnikNaProjekt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idDjelatnik" Type="int" Mode="In" />
+    <Parameter Name="idProjekt" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ime" Type="nvarchar" Mode="In" />
+    <Parameter Name="prezime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="datumZaposlenja" Type="date" Mode="In" />
+    <Parameter Name="tip" Type="int" Mode="In" />
+    <Parameter Name="tim" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ime" Type="nvarchar" Mode="In" />
+    <Parameter Name="email" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="InsertProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="datumOtvaranja" Type="date" Mode="In" />
+    <Parameter Name="idVoditelj" Type="int" Mode="In" />
+    <Parameter Name="idKlijent" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="VoditeljID" Type="int" Mode="In" />
+    <Parameter Name="DatumKreiranja" Type="date" Mode="In" />
+  </Function>
+  <Function Name="InsertTimNaProjekt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idTim" Type="int" Mode="In" />
+    <Parameter Name="idProjekt" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IzbaciDjelatnikaSProjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="projektID" Type="int" Mode="In" />
+    <Parameter Name="djelatnikID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IzbaciTimSProjekta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="projektID" Type="int" Mode="In" />
+    <Parameter Name="timID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="LoginUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateDjelatnik" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDDjelatnik" Type="int" Mode="In" />
+    <Parameter Name="TipID" Type="int" Mode="In" />
+    <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DatumZaposlenja" Type="date" Mode="In" />
+    <Parameter Name="TimID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateKlijent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="ime" Type="nvarchar" Mode="In" />
+    <Parameter Name="email" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="datumOtvaranja" Type="date" Mode="In" />
+    <Parameter Name="idVoditelj" Type="int" Mode="In" />
+    <Parameter Name="idKlijent" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateTim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="voditeljID" Type="int" Mode="In" />
+    <Parameter Name="DatumKreiranja" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="PRAModelStoreContainer">
+    <EntitySet Name="Djelatnik" EntityType="Self.Djelatnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Klijent" EntityType="Self.Klijent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoginDjelatnik" EntityType="Self.LoginDjelatnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projekt" EntityType="Self.Projekt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projekt_Djelatnik" EntityType="Self.Projekt_Djelatnik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projekt_Klijent" EntityType="Self.Projekt_Klijent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projekt_Tim" EntityType="Self.Projekt_Tim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SatiProjekt" EntityType="Self.SatiProjekt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tim" EntityType="Self.Tim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipDjelatnika" EntityType="Self.TipDjelatnika" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Djelatnik__TimID__300424B4" Association="Self.FK__Djelatnik__TimID__300424B4">
+      <End Role="Tim" EntitySet="Tim" />
+      <End Role="Djelatnik" EntitySet="Djelatnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Djelatnik__TipID__656C112C" Association="Self.FK__Djelatnik__TipID__656C112C">
+      <End Role="TipDjelatnika" EntitySet="TipDjelatnika" />
+      <End Role="Djelatnik" EntitySet="Djelatnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LoginDjel__Djela__151B244E" Association="Self.FK__LoginDjel__Djela__151B244E">
+      <End Role="Djelatnik" EntitySet="Djelatnik" />
+      <End Role="LoginDjelatnik" EntitySet="LoginDjelatnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt__Klijent__5AEE82B9" Association="Self.FK__Projekt__Klijent__5AEE82B9">
+      <End Role="Klijent" EntitySet="Klijent" />
+      <End Role="Projekt" EntitySet="Projekt" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt__Voditel__4AB81AF0" Association="Self.FK__Projekt__Voditel__4AB81AF0">
+      <End Role="Djelatnik" EntitySet="Djelatnik" />
+      <End Role="Projekt" EntitySet="Projekt" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt_D__Djela__4F7CD00D" Association="Self.FK__Projekt_D__Djela__4F7CD00D">
+      <End Role="Djelatnik" EntitySet="Djelatnik" />
+      <End Role="Projekt_Djelatnik" EntitySet="Projekt_Djelatnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt_D__Proje__4E88ABD4" Association="Self.FK__Projekt_D__Proje__4E88ABD4">
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="Projekt_Djelatnik" EntitySet="Projekt_Djelatnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt_K__Klije__49C3F6B7" Association="Self.FK__Projekt_K__Klije__49C3F6B7">
+      <End Role="Klijent" EntitySet="Klijent" />
+      <End Role="Projekt_Klijent" EntitySet="Projekt_Klijent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt_K__Proje__48CFD27E" Association="Self.FK__Projekt_K__Proje__48CFD27E">
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="Projekt_Klijent" EntitySet="Projekt_Klijent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt_T__Proje__5DCAEF64" Association="Self.FK__Projekt_T__Proje__5DCAEF64">
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="Projekt_Tim" EntitySet="Projekt_Tim" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekt_T__TimID__5EBF139D" Association="Self.FK__Projekt_T__TimID__5EBF139D">
+      <End Role="Tim" EntitySet="Tim" />
+      <End Role="Projekt_Tim" EntitySet="Projekt_Tim" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SatiProje__Djela__7D439ABD" Association="Self.FK__SatiProje__Djela__7D439ABD">
+      <End Role="Djelatnik" EntitySet="Djelatnik" />
+      <End Role="SatiProjekt" EntitySet="SatiProjekt" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SatiProje__Proje__7E37BEF6" Association="Self.FK__SatiProje__Proje__7E37BEF6">
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="SatiProjekt" EntitySet="SatiProjekt" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tim__VoditeljID__30F848ED" Association="Self.FK__Tim__VoditeljID__30F848ED">
+      <End Role="Djelatnik" EntitySet="Djelatnik" />
+      <End Role="Tim" EntitySet="Tim" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

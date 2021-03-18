@@ -1,0 +1,6 @@
+Da bi aplikacija ispravno radila, potrebno je označiti projekt IzvještavanjeAdministracija kao Startup Project, 
+odabrati stranicu Login.aspx i pritisnuti ctrl + F5. Potom se označuje projekt Evidencija_Radnih_Sati kao Startup
+Project, ulazi u HomeController.cs i pokreće ctrl + F5. 
+
+Podatci iz tablice koja se popunjava na site-u za Evidenciju vidljivi su na izvještaju koji se generira na 
+site-u za Administraciju i izvještavanje (u tom periodu).

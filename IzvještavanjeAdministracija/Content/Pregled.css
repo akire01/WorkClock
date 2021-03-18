@@ -1,0 +1,25 @@
+﻿body {
+}
+
+.row-select {
+    background-color: red;
+}
+
+.table {
+    margin-top: 20px;
+    margin: auto;
+    width: 95%;
+}
+
+.btn-primary {
+    margin-top: 15px;
+    margin-left: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+}
+
+
+.btn-danger {
+    margin: 10px;
+}

@@ -1,0 +1,278 @@
+﻿@model Evidencija_Radnih_Sati.Models.vm.DjelatnikVM
+
+@{
+    ViewBag.Title = "Table";
+}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link href="~/Content/Table.css" rel="stylesheet" />
+
+<h3>
+    <b> @Html.DisplayName(Model.Ime + " " + Model.Prezime)</b> &nbsp &nbsp
+    @DateTime.Now.Date.ToString("dd/MM/yyyy") &nbsp &nbsp
+    <input id="clock" readonly style="width:120px; border-radius:5px; background-color:black; color:white;" />
+</h3>
+
+
+
+<table class="table table-striped" >
+    <tr>
+        <th>Projekt</th>
+        <th>Zabilježeno</th>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Redovni sati</th>
+        <th>Prekovremeni sati</th>
+    </tr>
+    @foreach (String projekt in Model.Projekti)
+    {
+        <tr>
+            <td>@Html.DisplayName(projekt)</td>
+            <td>
+                <input id="@Html.DisplayName(projekt)-zabiljezeno" name="rezultat" style="width:110px; border:none;" readonly />
+            </td>
+            <td>
+                <a id="@Html.DisplayName(projekt)-start"
+                   name="start"
+                   onclick="Pocetak('@Html.DisplayName(projekt)')"
+                   style="text-decoration: none"
+                   class="material-icons start">
+                    not_started
+                </a>
+            </td>
+            <td>
+                <a id="@Html.DisplayName(projekt)-stop"
+                   onclick="Kraj('@Html.DisplayName(projekt)')"
+                   class="material-icons stop">
+                    stop
+                </a>
+            </td>
+            <td>
+                <input id="@Html.DisplayName(projekt)" name="radni" type="text" value="00:00" style="width:110px;" />
+            </td>
+            <td>
+                <input id="@Html.DisplayName(projekt)" name="prekovremeni" type="text" value="00:00" style="width:110px;" />
+            </td>
+
+        </tr>
+
+    }
+
+    <tr>
+        <th></th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a style="cursor:pointer;" onclick="Racunaj('radni')">Izračunaj ukupno</a></td>
+        <td><a style="cursor:pointer;" onclick="Racunaj('prekovremeni')">Izračunaj ukupno</a></td>
+    </tr>
+    <tr>
+        <th>Ukupno</th>
+        <td id="ukupno">00:00:00</td>
+        <td></td>
+        <td></td>
+        <td id="radniSati" style="font-weight:bold">00:00</td>
+        <td id="prekovremeniSati" style="font-weight:bold">00:00</td>
+    </tr>
+
+</table>
+
+<div>
+    <text>Komentar</text>
+    <br />
+    <textarea style="width: 1500px; max-width:1000px; height: 100px;">
+        </textarea>
+</div>
+
+<br />
+<div>
+    <button class="btn btn-danger" style="margin:5px; margin-right:10px;" onclick="Odustani()">Odustani</button>
+
+    <button class="btn btn-warning" style="margin:5px; margin-right:20px; color:black" onclick="SpremiPredaj(false)" type="submit">Spremi</button>
+
+
+    <button class="btn btn-primary" style="margin:5px; width:100px;" onclick="SpremiPredaj(true)" type="submit">Predaj</button>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+<script type="text/javascript">
+    setInterval("settime()", 1000);
+
+    var pocetak;
+    var kraj;
+
+
+    function settime() {
+        var dateTime = new Date();
+        var hour = dateTime.getHours();
+        var minute = dateTime.getMinutes();
+        var second = dateTime.getSeconds();
+
+        if (hour < 10)
+            hour = "0" + hour;
+
+        if (minute < 10)
+            minute = "0" + minute;
+
+        if (second < 10)
+            second = "0" + second;
+
+        var time = "" + hour + ":" + minute + ":" + second;
+
+        document.getElementById("clock").value = time;
+    }
+</script>
+
+
+<script type="text/javascript">
+    function Pocetak(poruka) {
+        pocetak = moment(); 
+        alert('Započeli ste bilježenje sati na projektu ' + poruka + "!");
+        document.getElementById(poruka + "-stop").style.visibility = "visible";
+        document.getElementById(poruka + "-start").style.visibility = "hidden";
+
+        document.getElementsByName("start").forEach((el) => {
+            el.style.visibility = "hidden";
+        });
+
+    }
+</script>
+
+<script type="text/javascript">
+    function Kraj(poruka) {
+
+        var trajanje;
+        kraj = moment();
+        alert('Završili ste bilježenje sati na projektu ' + poruka + "!");
+        document.getElementById(poruka + "-start").style.visibility = "visible";
+        document.getElementById(poruka + "-stop").style.visibility = "hidden";
+
+        var trenutnaVrijednost = document.getElementById(poruka + "-zabiljezeno").value;
+        var prosla = moment.duration(trenutnaVrijednost); 
+        var duration = moment.duration(kraj.diff(pocetak));
+
+        duration.add(prosla);
+
+        
+        trajanje = new Date(duration.asMilliseconds()).toISOString().substr(11, 8);
+
+        document.getElementById(poruka + "-zabiljezeno").value = trajanje;
+
+        document.getElementsByName("start").forEach((el) => {
+            el.style.visibility = "visible";
+        });
+
+        if (document.getElementById("ukupno").innerHTML === "") {
+            document.getElementById("ukupno").innerHTML = "00:00:00";
+        }
+
+        document.getElementsByName("start").forEach((el) => {
+            el.style.visibility = "visible";
+        });
+
+        var ukupno = document.getElementById("ukupno").innerHTML;
+        var ukupnoDuration = moment.duration("00:00:00");
+
+        document.getElementsByName("rezultat").forEach((el) => {
+            var dur = moment.duration(el.value);
+            ukupnoDuration.add(dur);
+        });
+
+
+        var ukupnoTrajanje = new Date(ukupnoDuration.asMilliseconds()).toISOString().substr(11, 8);
+        document.getElementById("ukupno").innerHTML = ukupnoTrajanje;
+    }
+</script>
+
+
+<script type="text/javascript">
+    function Odustani() {
+        window.location.reload();
+    }
+</script>
+
+
+<script type="text/javascript">
+    function Racunaj(tip) {
+
+        var ukupno = document.getElementById("radniSati").innerHTML;
+        var ukupnoDuration = moment.duration("00:00:00");
+
+        if (tip === "radni") {
+            document.getElementsByName("radni").forEach((el) => {
+                var dur = moment.duration(el.value);
+                ukupnoDuration.add(dur);
+            })
+            var ukupnoTrajanje = new Date(ukupnoDuration.asMilliseconds()).toISOString().substr(11, 5);
+            document.getElementById("radniSati").innerHTML = ukupnoTrajanje;
+        }
+
+        if (tip === "prekovremeni") {
+            document.getElementsByName("prekovremeni").forEach((el) => {
+                var dur = moment.duration(el.value);
+                ukupnoDuration.add(dur);
+            })
+            var ukupnoTrajanje = new Date(ukupnoDuration.asMilliseconds()).toISOString().substr(11, 5);
+
+            document.getElementById("prekovremeniSati").innerHTML = ukupnoTrajanje;
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    function SpremiPredaj(tip) {
+
+        var ukupno = 0;
+        var ukupnoRadni = 0;
+       
+     
+        var model = @Html.Raw(Json.Encode(Model));
+
+        model.ev.forEach((ev) => {
+
+            document.getElementsByName("radni").forEach((el) => {
+                if (el.id === ev.Projekt) {
+                    ev.RedovniSati = moment.duration(el.value).asMilliseconds() / 3600000;
+                    ukupno += Number(ev.RedovniSati);
+                    ukupnoRadni += Number(ev.RedovniSati);
+                    ev.Predano = tip;
+                }
+
+            })
+            document.getElementsByName("prekovremeni").forEach((el) => {
+                if (el.id === ev.Projekt) {
+                    ev.PrekovremeniSati = moment.duration(el.value).asMilliseconds() / 3600000;
+                    ukupno += Number(ev.PrekovremeniSati);
+                    ev.Predano = tip;
+                }
+
+            })
+
+        });
+
+        if (tip === true && ukupnoRadni < 8 && model.tip !== "Honorarni zaposlenik" && model.tip !== "Student") {
+            window.alert("Ne smijete imati manje 8 radnih sati u jednom danu i više od 12 sveukupno ");
+            return;
+        }
+        if (tip === true && ukupno > 12) {
+            window.alert("Ne smijete imati više od 12 sati rada u jednom danu");
+            return;
+        }
+
+        $.ajax({
+            url: '/Home/Table',
+            data: model,
+            type: "POST",
+            success: function () {
+                alert('Operacija je uspjela');
+            }
+        });
+
+
+
+    }
+</script>

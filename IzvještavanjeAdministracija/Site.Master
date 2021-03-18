@@ -1,0 +1,46 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="IzvještavanjeAdministracija.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <script src="Scripts/jquery-3.0.0.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/mycss.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+   
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        <nav class="navbar navbar-dark bg">
+            <a class="navbar-brand" href="Djelatnici.aspx">Djelatnici</a>
+            <a class="navbar-brand" href="Projekti.aspx">Projekti</a>
+            <a class="navbar-brand" href="Timovi.aspx">Timovi</a>
+            <a class="navbar-brand" href="Klijenti.aspx">Klijenti</a>
+            <a class="navbar-brand" href="Izvjestaji.aspx">Izvještaji</a>
+            <a class="navbar-brand" href="https://localhost:44370//Home/Edit">Evidencija Radnih Sati</a>
+            <a class="navbar-brand" href="Odjava.aspx">Odjava</a>
+        </nav>
+        
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+
+        <script src="Scripts/jquery-3.0.0.min.js"></script>
+        <script src="Scripts/popper-utils.js"></script>
+        <script src="Scripts/popper.min.js"></script>
+        <script src="Scripts/bootstrap.bundle.min.js"></script>
+        <script src="Scripts/bootstrap.min.js"></script>
+    </form>
+
+  
+</body>
+</html>

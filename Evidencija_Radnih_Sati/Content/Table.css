@@ -1,0 +1,11 @@
+﻿.start {
+    text-decoration: none;
+    color: forestgreen;
+    cursor: pointer
+}
+
+.stop {
+    color: red;
+    cursor: pointer;
+    visibility: hidden
+}

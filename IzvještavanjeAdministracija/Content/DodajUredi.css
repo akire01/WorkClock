@@ -1,0 +1,19 @@
+﻿body {
+}
+
+.forma {
+    margin: auto;
+    margin-top: 40px;
+    width: 900px;
+    border: 5px solid #4056F4;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+
+.material-icons {
+    font-size: 5em !important;
+    font-size: 4em;
+    color: #4056F4;
+}
+
